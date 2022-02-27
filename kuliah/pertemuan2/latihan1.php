@@ -50,18 +50,27 @@ echo '<hr>';
 // Aritmatika
 // +, -, *, /, % (modulo/modulus/sisa bagi)
 echo 1 + 1 ;
+// OPERATOR
+// Aritmatika
+// +, -, *, /, %
+echo 10 * 10;
+echo "<br>";
+echo 20 - 10;
+echo "<br>" ;
+echo 1 + 2 * 3 - 4; // kabataku
+echo "<br>" ;
+echo 10 % 5;
+echo "<hr>";
 
-
-
-echo '<hr>';
 // Perbandingan
 // <, > <=, >=, ==, /=
-echo 1 < 5;
-echo '<br>';
-echo 1 == 1;
-echo '<hr>';
+echo 1 < 2; //true / 1
+echo "<br>";
+echo 10 < 5; //false / null (hilang/tidak bernilai/tidak tampil)
+echo "<br>";
+echo 10 == "10"; //true
 
-// Identitaw / Strict Comparison
+// Identitas / Strict Comparison
 // ===, !==
 echo 1 === "1";
 echo '<hr>';
