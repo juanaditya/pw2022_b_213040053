@@ -1,35 +1,13 @@
-<?php 
-    $mahasiswa = [
-        [
-        "nama" => "Juan Aditya", 
-        "npm" => "213040053", 
-        "email" => "juanaditya@gmail.com", 
-        "jurusan" =>"Teknik Informatika",
-        "gambar" => "nopoto.jpeg"
-    ],
-        [
-        "nama" => "Moch Priamitra Nur Alif", 
-        "npm" => "213040063", 
-        "email" => "priamitra@gmail.com", 
-        "jurusan" => "Teknik Informatika",
-        "gambar" => "nopoto.jpeg"
-    ],
-        [
-        "nama" => "Audi Hzr", 
-        "npm" => "213040066", 
-        "email" => "audihzr@gmail.com", 
-        "jurusan" => "Teknik Informatika",
-        "gambar" => "nopoto.jpeg"
-    ],
-        [
-        "nama" => "Faisal", 
-        "npm" => "213040012", 
-        "email" =>"faisal@gmail.com", 
-        "jurusan" => "Teknik Informatika",
-        "gambar" => "nopoto.jpeg"
-        ]
-    ];
+ <?php 
+// Koneksi ke DB
+mysqli_connect('localhost', 'root', '', 'pw2022_b_213040053') or die('KONEKSI GAGAL!!');
+
+// Query ke tabel mahasiswa
+
+
+// Siapkan data $mahasiswa
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
