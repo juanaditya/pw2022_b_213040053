@@ -93,8 +93,8 @@ if(isset($_GET["cari"])){
         <tr class="align-middle">
         <th scope="row"><?= $i++; ?></th>
         <td>
-            <img src="img/<?= $o["gambar"]?>" width="50 px";
-            class="rounded-circle">
+            <img src="img/<?= $o["gambar"]?>" width="150 px";
+            class="img-preview">
         </td>
         <td> <?= $o["nama"]?> </td>
         <td><?= $o["keterangan"]?></td>

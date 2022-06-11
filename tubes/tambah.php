@@ -2,25 +2,19 @@
 require 'functions.php';
 
 
-if( isset($_POST["submit"])) {
+if(isset($_POST['tambah'])) {
 
-	if( tambah($_POST) > 0) {
-	    echo "
-			<script>
-			alert ('data berhasil ditambahkan!');
-			document.location.href = 'index.php';
-			</script>
-		";
+	if(tambah($_POST) > 0) {
+	    echo "<script>
+		        alert ('data berhasil ditambahkan!');
+		        document.location.href = 'index.php'
+		        </script>";
 	} else {
-		echo "
-		<script>
-		alert ('data gagal ditambahkan!');
-		document.location.href = 'index.php';
-		</script>
-		";
+		echo "<script>
+		        alert ('data gagal ditambahkan!');
+		        document.location.href = 'index.php'
+		        </script>";
 	}
-
-
 }
 
 
@@ -98,12 +92,12 @@ if( isset($_POST["submit"])) {
         <div class="mb-3 row">
             <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
             <div class="col-sm-10">
-            <input type="file" class="form-control" name="gambar" id="gambar">
+            <input type="file" class="form-control" name="gambar" id="gambar" onchange="previewImage()">
             </div>
         </div>
 
         <div class="mb-3 row">
-            <button type="submit" name="submit" class="btn btn-primary">Tambah Data</button>
+            <button type="submit" class="btn btn-primary" name="tambah">Tambah Data</button>
         </div>
     </form>
 

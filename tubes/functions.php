@@ -16,71 +16,58 @@ function query($query) {
 function tambah($data) {
     global $conn;
 
-    $nama = htmlspecialchars($data["nama"]);
-	$keterangan = htmlspecialchars($data["keterangan"]);
-	$perusahaan = htmlspecialchars($data["perusahaan"]);
-    $dosis = htmlspecialchars($data["dosis"]);
-	$gambar = upload();
-    if( !$gambar ) {
-        return false ;
+    //jika user tidak memilih gambar
+    if($_FILES["gambar"]["error"] === 4) {
+        $gambar = 'default.jpg' ;
+    } else {
+        //jalankan fungsi upload gambar
+        $gambar = upload();
+        // cek jika upload gagal
+        if (!$gambar) {
+            return false;
+        }
     }
 
+    $nama = htmlspecialchars($data['nama']);
+    $keterangan =  htmlspecialchars($data['keterangan']);
+    $perusahaan =  htmlspecialchars($data['perusahaan']);
+    $dosis =  htmlspecialchars($data['dosis']);
+    // $gambar =  htmlspecialchars($data['gambar']);
 
+    $query = "INSERT INTO obat VALUES (null, '$nama', '$keterangan', '$perusahaan', '$dosis', '$gambar')";
 
-    $query = "INSERT INTO obat
-				VALUES
-				('', '$nama', '$keterangan', '$perusahaan', '$dosis', '$gambar')
-			";
-	
-	mysqli_query($conn, $query);
+    mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
 }
 
 // Function upload
 function upload() {
+    //siapkan data gambar
+    $filename = $_FILES["gambar"]["name"];
+    $filetmpname = $_FILES["gambar"]["tmp_name"];
+    $filesize = $_FILES["gambar"]["size"];
+    $filetype = pathinfo($filename, PATHINFO_EXTENSION);
+    $allowedtype = ["jpg", "jpeg", "png"];
 
-	$namaFile = $_FILES['gambar']['name'];
-	$ukuranFile = $_FILES['gambar']['size'];
-	$error = $_FILES['gambar']['error'];
-	$tmpName = $_FILES['gambar']['tmp_name'];
+    // cek apakah file yg diupload bukan gambar
+    if(!in_array($filetype, $allowedtype)) {
+        echo "<script> alert('File Tidak Mendukung!'); </script>" ;
 
-	// cek apakah tidak ada gambar yang diupload
-	if( $error === 4 ) {
-		echo "<script>
-				alert('pilih gambar terlebih dahulu!');
-			</script>";
-		return false;
-	}
+        return false;
+    }
 
-	// cek apakah yang diupload adalah gambar
-	$ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
-	$ekstensiGambar = explode('.', $namaFile);
-	$ekstensiGambar = strtolower(end($ekstensiGambar));
-	if( !in_array($ekstensiGambar, $ekstensiGambarValid) ) {
-		echo "<script>
-				alert('yang anda upload bukan gambar!');
-			</script>";
-		return false;
-	}
+    //cek apakah gambar terlalu besar
+    if($filesize > 1000000) {
+        echo "<script> alert('file terlalu besar'); </script>" ;
+        return false;
+    }
+    //lolos pengecekan
+    $newfilename = uniqid() . $filename;
 
-	// cek jika ukurannya terlalu besar
-	if( $ukuranFile > 1000000 ) {
-		echo "<script>
-				alert('ukuran gambar terlalu besar!');
-			</script>";
-		return false;
-	}
+    move_uploaded_file($filetmpname, '../img/' . $filename);
 
-	// lolos pengecekan, gambar siap diupload
-	// generate nama gambar baru
-	$namaFileBaru = uniqid();
-	$namaFileBaru .= '.';
-	$namaFileBaru .= $ekstensiGambar;
-
-	move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
-
-	return $namaFileBaru;
+    return $filename;
 }
 
 
