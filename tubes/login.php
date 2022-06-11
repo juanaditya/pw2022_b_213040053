@@ -1,3 +1,37 @@
+<?php
+session_start();
+// Jika bisa login maka ke index.php
+if (isset($_SESSION['login'])) {
+    header('location:index.php');
+    exit;
+}
+
+// Memanggil atau membutuhkan file function.php
+require 'functions.php';
+
+// jika tombol yang bernama login diklik
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    // password menggunakan md5
+
+    // mengambil data dari user dimana username yg diambil
+    $conn = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+    $cek = mysqli_num_rows($conn);
+
+    // jika $cek lebih dari 0, maka berhasil login dan masuk ke index.php
+    if ($cek > 0) {
+        $_SESSION['login'] = true;
+
+        header('location:index.php');
+        exit;
+    }
+    // jika $cek adalah 0 maka tampilkan error
+    $error = true;  
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,13 +53,13 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
-    <a class="navbar-brand" href="#">J_ADT</a>
+    <a class="navbar-brand" href="#">JUAN KLINIK</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="index.php">Login</a>
+        <a class="nav-link" href="#">Login</a>
     </div>
     </div>
 </div>
@@ -50,6 +84,7 @@
                     </div>
 
                     <button class="btn btn-primary text-uppercase" type="submit" name="login">Login</button>
+                    <div class="text-center"> Belum punya akun, silahkan <a href="registrasi.php">Registrasi</a></div>                
                 </form>
             </div>
         </div>

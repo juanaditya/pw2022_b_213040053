@@ -1,7 +1,6 @@
 <?php
 // koneksi ke database
-$conn = mysqli_connect('localhost','root','','tubes') or die('Koneksi GAGAL');
-
+	$conn = mysqli_connect('localhost','root','','tubes') or die('Koneksi GAGAL');
 
 function query($query) {
     global $conn;
@@ -13,7 +12,7 @@ function query($query) {
     return $rows;
 }
 
-
+// function tambah
 function tambah($data) {
     global $conn;
 
@@ -38,6 +37,7 @@ function tambah($data) {
     return mysqli_affected_rows($conn);
 }
 
+// Function upload
 function upload() {
 
 	$namaFile = $_FILES['gambar']['name'];
@@ -84,14 +84,14 @@ function upload() {
 }
 
 
-
+// Function Hapus
 function hapus($id) {
     global $conn;
     mysqli_query($conn, "DELETE FROM obat WHERE id = $id");
     return mysqli_affected_rows($conn);
 }
 
-
+// Function Ubah
 function ubah($data) {
 
     global $conn;
@@ -118,11 +118,40 @@ function ubah($data) {
 
 }
 	
+// register akun
+function register($data) {
+    global $conn;
 
+    $username = strtolower(stripslashes($data["username"]));
+    $password = mysqli_real_escape_string($conn, $data["password"]);
+    $password2 = mysqli_real_escape_string($conn, $data["password2"]);
 
+    //cek email
+    $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+    if (mysqli_fetch_assoc($result)) {
+        echo "<script>
+                alert('Your Email Already Registered, Please Try Another Email');
+                document.location.href = 'registrasi.php';
+                </script>";
+        return false;
+    }
 
+    //cek konfrimasi password
+    if( $password !== $password2 ) {
+        echo "<script>
+                alert('Sorry your Password not correct!');
+                document.location.href = 'registrasi.php';
+                </script>";
 
+        return false;
+    }
+//enkripsi password
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
+//tambahkan userbaru ke database
+    mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$password', 'user')");
 
+    return mysqli_affected_rows($conn);
+}
 
 ?>

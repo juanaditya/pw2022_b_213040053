@@ -5,7 +5,7 @@ require 'functions.php';
 if( isset($_POST["submit"])) {
 
 	if( tambah($_POST) > 0) {
-		echo "
+	    echo "
 			<script>
 			alert ('data berhasil ditambahkan!');
 			document.location.href = 'index.php';
@@ -47,15 +47,14 @@ if( isset($_POST["submit"])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-uppercase">
 <div class="container">
-    <a class="navbar-brand" href="#">J_ADT</a>
+    <a class="navbar-brand" href="#">JUAN KLINIK</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ms-auto">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">About </a>
-        <a class="nav-link" href="#">Logout </a>
+        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+        <a class="nav-link" href="login.php">Logout </a>
     </div>
     </div>
 </div>
