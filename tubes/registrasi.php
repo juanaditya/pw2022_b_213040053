@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,13 +42,13 @@
                 <!-- Ini Error jika tidak bisa login -->
                 <form action="" method="post">
                     <div class="form-group user">
-                        <input type="text" class="form-control w-50" placeholder="Masukkan Username" name="username" autocomplete="off" required>
+                        <input type="text" class="form-control w-50" placeholder="Masukkan Username" name="username" id="username" autocomplete="off" required>
                     </div>
                     <div class="form-group my-5">
-                        <input type="password" class="form-control w-50" placeholder="Masukkan Password" name="password" autocomplete="off" required>
+                        <input type="password" class="form-control w-50" placeholder="Masukkan Password" name="password" id="password" autocomplete="off" required>
                     </div>
                     <div class="form-group my-5">
-                        <input type="password" class="form-control w-50" placeholder="Konfirmasi Password" name="password2" autocomplete="off" required>
+                        <input type="password" class="form-control w-50" placeholder="Konfirmasi Password" name="password2" id="password2" autocomplete="off" required>
                     </div>
                     <button class="btn btn-primary text-uppercase" type="submit" name="register">Submit</button>
                 </form>
